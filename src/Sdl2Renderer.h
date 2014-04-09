@@ -22,6 +22,6 @@ class Sdl2Renderer {
         void start();
         void stop();
         void showActor(Actor * actor);
-        void waitForExit();
+        bool waitForExit();
 };
 #endif

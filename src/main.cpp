@@ -17,13 +17,20 @@ int main( int argc, char* args[] )
     hero->name = "hero.png";
     hero->width = 100;
     hero->height = 158;
-    hero->x = (WINDOW_WIDTH/2) - hero->width/2;
+    hero->x = 0;
     hero->y = (WINDOW_HEIGHT/2) - hero->height/2;
     
-    Sdl2Renderer * renderer = new Sdl2Renderer("Incrementalist step 1", WINDOW_WIDTH, WINDOW_HEIGHT);
+    Sdl2Renderer * renderer = new Sdl2Renderer("Incrementalist step 2", WINDOW_WIDTH, WINDOW_HEIGHT);
     renderer->start();
-    renderer->showActor(hero);
-    renderer->waitForExit();
+
+    bool running = true;
+    while(running) {
+        hero->x = hero->x + 1;
+
+        renderer->showActor(hero);
+        running = renderer->waitForExit(); 
+    }
+    
     renderer->stop();
 
     delete hero;

@@ -66,14 +66,14 @@ void Sdl2Renderer::showActor(Actor * actor) {
     SDL_FreeSurface( heroImage );
 }
 
-void Sdl2Renderer::waitForExit(){
+bool Sdl2Renderer::waitForExit(){
     SDL_Event e;
     bool running = true;
 
     while(running) {
 
         if (SDL_PollEvent( &e ) == 0) {
-            continue;
+            break;
         }
         
         //std::cout << "Event fired : " << e.type << std::endl;
@@ -84,4 +84,6 @@ void Sdl2Renderer::waitForExit(){
         }
 
     }
+
+    return running;
 }
