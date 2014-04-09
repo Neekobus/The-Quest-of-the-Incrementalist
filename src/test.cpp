@@ -1,4 +1,5 @@
 #include <SDL2/SDL.h>
+#include <SDL2_Image/SDL_image.h>
 #include <iostream>
 
 const int WINDOW_WIDTH = 640;
@@ -9,12 +10,19 @@ int main( int argc, char* args[] )
 
 	std::cout << "Testing SDL2..." << std::endl;
 
+
     SDL_Window * window = NULL;
     SDL_Surface * screenSurface = NULL;
     SDL_Surface * heroImage = NULL;
 
     if( SDL_Init( SDL_INIT_VIDEO ) < 0 ) {
         std::cerr << "SDL init fail. SDL_Error : " << SDL_GetError() << std::endl;
+        SDL_Quit();
+        return 1;
+    } 
+
+    if (IMG_Init( IMG_INIT_PNG ) < 0) { // IMG_INIT_JPG | IMG_INIT_PNG
+        std::cerr << "SDL init IMG fail. SDL_Error : " << IMG_GetError() << std::endl;
         SDL_Quit();
         return 1;
     } 
@@ -29,7 +37,9 @@ int main( int argc, char* args[] )
 
 	screenSurface = SDL_GetWindowSurface( window );
 
-	heroImage = SDL_LoadBMP( "hero.bmp" );
+	//heroImage = SDL_LoadBMP( "hero.bmp" );
+    heroImage = IMG_Load("hero.png");
+
 
     if( heroImage == NULL ) {
     	std::cerr << "SDL LoadBMP fail. SDL_Error : " << SDL_GetError() << std::endl;
@@ -69,6 +79,7 @@ int main( int argc, char* args[] )
 
     SDL_FreeSurface( heroImage );
     SDL_DestroyWindow( window );
+    IMG_Quit();
     SDL_Quit();
 
     std::cout << "...Done testing SDL2." << std::endl;
