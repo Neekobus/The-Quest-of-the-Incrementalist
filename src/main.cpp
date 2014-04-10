@@ -4,6 +4,7 @@
 
 #include "Actor.h"
 #include "Sdl2Renderer.h"
+#include "MainController.h"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
@@ -21,18 +22,13 @@ int main( int argc, char* args[] )
     hero->y = (WINDOW_HEIGHT/2) - hero->height/2;
     
     Sdl2Renderer * renderer = new Sdl2Renderer("Incrementalist step 2", WINDOW_WIDTH, WINDOW_HEIGHT);
-    renderer->start();
-
-    bool running = true;
-    while(running) {
-        hero->x = hero->x + 1;
-
-        renderer->showActor(hero);
-        running = renderer->waitForExit(); 
-    }
     
-    renderer->stop();
-
+    MainController * controller = new MainController();
+    controller->actor = hero;
+    controller->renderer = renderer;
+    controller->run();
+    
+    delete controller;
     delete hero;
     delete renderer;
 
