@@ -7,8 +7,9 @@
 
 class Actor {  
     protected: 
-        void checkMove(bool move); 
-        int way;
+        void checkMove(bool moveWay1, bool moveWay2, float &currentVelocity, float &startVelocity, float &acceleration, float &way);
+        void doMove(float elapsedMs, float &acceleration, float &currentVelocity, float &startVelocity, float &maxVelocity, float &position, float &way);
+        Vector way;
     public:
         Actor();
         Vector position;

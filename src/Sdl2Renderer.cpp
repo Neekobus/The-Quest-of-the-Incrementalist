@@ -88,6 +88,14 @@ bool Sdl2Renderer::processEventsAndWaitForExit(){
             if(e.key.keysym.sym==SDLK_RSHIFT){
                 this->inputManager->inputPressed(InputManager::INPUT_SHIFT);
             }
+
+            if(e.key.keysym.sym==SDLK_UP){
+                this->inputManager->inputPressed(InputManager::INPUT_UP_ARROW);
+            }
+
+            if(e.key.keysym.sym==SDLK_DOWN){
+                this->inputManager->inputPressed(InputManager::INPUT_DOWN_ARROW);
+            }
         }
 
         if (e.type == SDL_KEYUP) {
@@ -101,6 +109,14 @@ bool Sdl2Renderer::processEventsAndWaitForExit(){
             
             if(e.key.keysym.sym==SDLK_RSHIFT){
                 this->inputManager->inputReleased(InputManager::INPUT_SHIFT);
+            }
+
+            if(e.key.keysym.sym==SDLK_UP){
+                this->inputManager->inputReleased(InputManager::INPUT_UP_ARROW);
+            }
+
+            if(e.key.keysym.sym==SDLK_DOWN){
+                this->inputManager->inputReleased(InputManager::INPUT_DOWN_ARROW);
             }
         }
 

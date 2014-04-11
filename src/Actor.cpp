@@ -13,69 +13,78 @@ Actor::Actor(){
     this->name = "unknown";
 }
 
-void Actor::checkMove(bool move){
+void Actor::checkMove(bool moveWay1, bool moveWay2, float &currentVelocity, float &startVelocity, float &acceleration, float &way){
     
-    if (this->currentVelocity.x == 0 && ! move ) {
+    bool move = moveWay1 || moveWay2; 
+
+    if (currentVelocity == 0 && ! move ) {
         return;
     }
 
-    if (this->currentVelocity.x == 0 && move) {
-        this->currentVelocity.x = this->startVelocity.x;
-        this->acceleration.x = 1.3;
+    if (currentVelocity == 0 && move) {
+        currentVelocity = startVelocity;
+        acceleration = 1.3;
         return;
     }
 
-    if (this->currentVelocity.x != 0 && !move) {
-        this->acceleration.x = 0.8;
+    if (currentVelocity != 0 && !move) {
+        acceleration = 0.8;
         return;
+    }
+
+
+    if (moveWay1) {
+        way = -1; 
+    }
+
+    if (moveWay2) {
+        way = 1; 
+    }
+
+    if (moveWay1 && moveWay2) {
+        currentVelocity = 0;
     }
 
 }
 
+void Actor::doMove(float elapsedMs, float &acceleration, float &currentVelocity, float &startVelocity, float &maxVelocity, float &position, float &way) {
 
-void Actor::move(float elapsedMs) {
-    bool right = this->inputManager->isPressed(InputManager::INPUT_RIGHT_ARROW);
-    bool left = this->inputManager->isPressed(InputManager::INPUT_LEFT_ARROW);
-    
-    this->checkMove(right || left);    
-    
-    if (left) {
-        way = -1; 
-    }
-
-    if (right) {
-        way = 1; 
-    }
-
-    if (left && right) {
-        this->currentVelocity.x = 0;
-    }
-
-    std::cout << "Acceleration : " << this->acceleration.x << "" << std::endl;
+    std::cout << "Acceleration : " << acceleration << "" << std::endl;
     
     //acceleration
-    this->currentVelocity.x *= this->acceleration.x;
+    currentVelocity *= acceleration;
 
     //bounds
-    if (this->currentVelocity.x < this->startVelocity.x) {
-        this->currentVelocity.x = 0;
+    if (currentVelocity < startVelocity) {
+        currentVelocity = 0;
         way = 1;
     }
 
-    if (this->currentVelocity.x > this->maxVelocity.x) {
-        this->currentVelocity.x = this->maxVelocity.x;
+    if (currentVelocity > maxVelocity) {
+        currentVelocity = maxVelocity;
     }
 
     float elapsedSec = elapsedMs / 1000;
-    float move = this->currentVelocity.x * elapsedSec ;
+    float move = currentVelocity * elapsedSec ;
 
-    move *= this->way;    
+    move *= way;    
     
-    
-
-    std::cout << "Velocity : " << this->currentVelocity.x << " px/s" << std::endl;
+    std::cout << "Velocity : " << currentVelocity << " px/s" << std::endl;
     std::cout << "Elapsed : " << elapsedSec << " s" << std::endl;
     std::cout << "Move : " << move << " px" << std::endl;
  
-    this->position.x = this->position.x + move;
+    position = position + move;
+}
+
+void Actor::move(float elapsedMs) {
+    bool right  = this->inputManager->isPressed(InputManager::INPUT_RIGHT_ARROW);
+    bool left   = this->inputManager->isPressed(InputManager::INPUT_LEFT_ARROW);
+    bool up     = this->inputManager->isPressed(InputManager::INPUT_UP_ARROW);
+    bool down   = this->inputManager->isPressed(InputManager::INPUT_DOWN_ARROW);
+    
+    this->checkMove(left, right, this->currentVelocity.x, this->startVelocity.x, this->acceleration.x, this->way.x);
+    this->checkMove(up,   down,  this->currentVelocity.y, this->startVelocity.y, this->acceleration.y, this->way.y);
+
+    this->doMove(elapsedMs, this->acceleration.x, this->currentVelocity.x, this->startVelocity.x, this->maxVelocity.x, this->position.x, this->way.x);
+    this->doMove(elapsedMs, this->acceleration.y, this->currentVelocity.y, this->startVelocity.y, this->maxVelocity.y, this->position.y, this->way.y);
 }
