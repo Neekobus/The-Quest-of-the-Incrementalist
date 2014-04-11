@@ -7,11 +7,19 @@ Actor::Actor(){
     this->width = 0;
     this->height = 0;
     this->velocity = 0;
+    this->maxVelocity = 0;
+    this->acceleration = 0;
     this->name = "unknown";
 }
 
 
 void Actor::move(float elapsedMs) {
+    //acceleration
+    this->velocity *= this->acceleration;
+
+    if (this->velocity > this->maxVelocity) {
+        this->velocity = this->maxVelocity;
+    }
 
     float elapsedSec = elapsedMs / 1000;
     float move = this->velocity * elapsedSec;

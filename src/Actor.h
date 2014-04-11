@@ -12,6 +12,8 @@ class Actor {
         int height;
 
         int velocity; //in pixels per second
+        int maxVelocity;
+        float acceleration;
 
         std::string name;
 
