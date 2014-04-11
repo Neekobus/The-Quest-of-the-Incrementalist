@@ -13,7 +13,7 @@ void MainController::run(){
 	this->running = true;
 
   int lastStepCallMs = clock() / (CLOCKS_PER_SEC / 1000);
-  int expectedDuration = 1000/60;
+  int expectedDuration = 1000/30; //1000/2; //1000/60
   int totalSleepMs = 0;
 
   while(this->running) {
@@ -35,15 +35,23 @@ void MainController::run(){
     }
 
     std::cout << "[Work] " << std::endl;
-    this->step();
+    this->step(effectiveMs);
     lastStepCallMs =  totalSleepMs + clock() / (CLOCKS_PER_SEC / 1000);
   }
     
   this->renderer->stop();
 }
 
-void MainController::step(){
-	this->actor->x = this->actor->x + 1;
+void MainController::step(float elapsedMs){
+  float actorVelocity = 100; 
+  float elapsedSec = elapsedMs / 1000;
+  float move = actorVelocity * elapsedSec;
+
+  std::cout << "Velocity : " << actorVelocity << " px/s" << std::endl;
+  std::cout << "Elapsed : " << elapsedSec << " s" << std::endl;
+  std::cout << "Move : " << move << " px" << std::endl;
+
+	this->actor->x = this->actor->x + move;
   this->renderer->showActor(this->actor);
   this->running = this->renderer->waitForExit(); 
 }

@@ -14,6 +14,6 @@ class MainController {
         Actor * actor;
 
         void run();
-        void step();
+        void step(float elapsedTime);
 };
 #endif
