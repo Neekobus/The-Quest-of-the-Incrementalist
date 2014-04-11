@@ -24,9 +24,9 @@ void Actor::move(float elapsedMs) {
     float elapsedSec = elapsedMs / 1000;
     float move = this->velocity * elapsedSec;
 
-    std::cout << "Velocity : " << this->velocity << " px/s" << std::endl;
-    std::cout << "Elapsed : " << elapsedSec << " s" << std::endl;
-    std::cout << "Move : " << move << " px" << std::endl;
+    //std::cout << "Velocity : " << this->velocity << " px/s" << std::endl;
+    //std::cout << "Elapsed : " << elapsedSec << " s" << std::endl;
+    //std::cout << "Move : " << move << " px" << std::endl;
  
     this->x = this->x + move;
 }

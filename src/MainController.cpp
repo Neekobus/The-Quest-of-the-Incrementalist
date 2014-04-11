@@ -30,7 +30,7 @@ void MainController::run(){
 void MainController::step(float elapsedMs){
 	this->actor->move(elapsedMs);
   this->renderer->showActor(this->actor);
-  this->running = this->renderer->waitForExit(); 
+  this->running = this->renderer->processEventsAndWaitForExit(); 
 }
 
 MainController::~MainController(){

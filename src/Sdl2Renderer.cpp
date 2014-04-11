@@ -66,7 +66,7 @@ void Sdl2Renderer::showActor(Actor * actor) {
     SDL_FreeSurface( heroImage );
 }
 
-bool Sdl2Renderer::waitForExit(){
+bool Sdl2Renderer::processEventsAndWaitForExit(){
     SDL_Event e;
     bool running = true;
 
@@ -76,7 +76,33 @@ bool Sdl2Renderer::waitForExit(){
             break;
         }
         
-        //std::cout << "Event fired : " << e.type << std::endl;
+        if (e.type == SDL_KEYDOWN) {
+            if(e.key.keysym.sym==SDLK_LEFT){
+                this->inputManager->inputPressed(InputManager::INPUT_LEFT_ARROW);
+            }
+
+            if(e.key.keysym.sym==SDLK_RIGHT){
+                this->inputManager->inputPressed(InputManager::INPUT_RIGHT_ARROW);
+            }
+
+            if(e.key.keysym.sym==SDLK_RSHIFT){
+                this->inputManager->inputPressed(InputManager::INPUT_SHIFT);
+            }
+        }
+
+        if (e.type == SDL_KEYUP) {
+            if(e.key.keysym.sym==SDLK_LEFT){
+                this->inputManager->inputReleased(InputManager::INPUT_LEFT_ARROW);
+            }
+            
+            if(e.key.keysym.sym==SDLK_RIGHT){
+                this->inputManager->inputReleased(InputManager::INPUT_RIGHT_ARROW);
+            }
+            
+            if(e.key.keysym.sym==SDLK_RSHIFT){
+                this->inputManager->inputReleased(InputManager::INPUT_SHIFT);
+            }
+        }
 
         if( e.type == SDL_QUIT ) {
             running = false;

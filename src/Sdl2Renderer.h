@@ -7,6 +7,7 @@
 #include <string>
 
 #include "Actor.h"
+#include "InputManager.h"
 
 class Sdl2Renderer {    
     protected:
@@ -18,10 +19,12 @@ class Sdl2Renderer {
         SDL_Surface * screen;
 
     public:
+        InputManager * inputManager;
+
         Sdl2Renderer(std::string winTitle, int winWidth, int winHeight);
         void start();
         void stop();
         void showActor(Actor * actor);
-        bool waitForExit();
+        bool processEventsAndWaitForExit();
 };
 #endif

@@ -4,6 +4,7 @@
 
 #include "Actor.h"
 #include "Sdl2Renderer.h"
+#include "InputManager.h"
 #include "MainController.h"
 
 const int WINDOW_WIDTH = 640;
@@ -25,12 +26,15 @@ int main( int argc, char* args[] )
     hero->acceleration = 1.2;
     
     Sdl2Renderer * renderer = new Sdl2Renderer("Incrementalist step 2", WINDOW_WIDTH, WINDOW_HEIGHT);
-    
+    renderer->inputManager = new InputManager();
+
+
     MainController * controller = new MainController();
     controller->actor = hero;
     controller->renderer = renderer;
     controller->run();
     
+    delete renderer->inputManager;
     delete controller;
     delete hero;
     delete renderer;
