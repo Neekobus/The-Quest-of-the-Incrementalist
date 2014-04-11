@@ -43,15 +43,7 @@ void MainController::run(){
 }
 
 void MainController::step(float elapsedMs){
-  float actorVelocity = 100; 
-  float elapsedSec = elapsedMs / 1000;
-  float move = actorVelocity * elapsedSec;
-
-  std::cout << "Velocity : " << actorVelocity << " px/s" << std::endl;
-  std::cout << "Elapsed : " << elapsedSec << " s" << std::endl;
-  std::cout << "Move : " << move << " px" << std::endl;
-
-	this->actor->x = this->actor->x + move;
+	this->actor->move(elapsedMs);
   this->renderer->showActor(this->actor);
   this->running = this->renderer->waitForExit(); 
 }

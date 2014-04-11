@@ -11,6 +11,10 @@ class Actor {
         int width;
         int height;
 
+        int velocity; //in pixels per second
+
         std::string name;
+
+        void move(float elapsedMs);
 };
 #endif

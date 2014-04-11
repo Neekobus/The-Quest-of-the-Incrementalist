@@ -20,6 +20,7 @@ int main( int argc, char* args[] )
     hero->height = 158;
     hero->x = 0;
     hero->y = (WINDOW_HEIGHT/2) - hero->height/2;
+    hero->velocity = 100;
     
     Sdl2Renderer * renderer = new Sdl2Renderer("Incrementalist step 2", WINDOW_WIDTH, WINDOW_HEIGHT);
     
