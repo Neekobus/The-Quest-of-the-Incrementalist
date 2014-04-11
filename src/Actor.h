@@ -2,8 +2,12 @@
 #define ACTORH
 
 #include <string>
+#include "InputManager.h"
 
-class Actor {    
+class Actor {  
+    protected: 
+        void checkMove(bool move); 
+        int way;
     public:
         Actor();
         int x;
@@ -11,9 +15,12 @@ class Actor {
         int width;
         int height;
 
-        int velocity; //in pixels per second
+        int currentVelocity; //in pixels per second
+        int startVelocity;
         int maxVelocity;
         float acceleration;
+
+        InputManager * inputManager;
 
         std::string name;
 
