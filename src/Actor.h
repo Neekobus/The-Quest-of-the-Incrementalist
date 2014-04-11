@@ -3,6 +3,7 @@
 
 #include <string>
 #include "InputManager.h"
+#include "Vector.h"
 
 class Actor {  
     protected: 
@@ -10,15 +11,15 @@ class Actor {
         int way;
     public:
         Actor();
-        int x;
-        int y;
+        Vector position;
+
         int width;
         int height;
 
-        int currentVelocity; //in pixels per second
-        int startVelocity;
-        int maxVelocity;
-        float acceleration;
+        Vector currentVelocity;
+        Vector startVelocity;
+        Vector maxVelocity;
+        Vector acceleration;
 
         InputManager * inputManager;
 

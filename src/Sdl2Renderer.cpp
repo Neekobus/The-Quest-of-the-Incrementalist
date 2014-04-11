@@ -54,8 +54,8 @@ void Sdl2Renderer::showActor(Actor * actor) {
     }
 
     SDL_Rect destRect;
-    destRect.x = actor->x;
-    destRect.y = actor->y;
+    destRect.x = actor->position.x;
+    destRect.y = actor->position.y;
     destRect.w = actor->width;
     destRect.h = actor->height;
 

@@ -21,19 +21,25 @@ int main( int argc, char* args[] )
     hero->name = "hero.png";
     hero->width = 100;
     hero->height = 158;
-    //hero->x = (WINDOW_WIDTH/2) - hero->width/2;
-    hero->y = (WINDOW_HEIGHT/2) - hero->height/2;
+    hero->position.x = (WINDOW_WIDTH/2) - hero->width/2;
+    hero->position.y = (WINDOW_HEIGHT/2) - hero->height/2;
     
-    hero->currentVelocity = 0;
-    hero->startVelocity = 20;
-    hero->maxVelocity = 300;
-    hero->acceleration = 0;
+    hero->currentVelocity.x = 0;
+    hero->currentVelocity.y = 0;
+    
+    hero->startVelocity.x = 20;
+    hero->startVelocity.y = 20;
+
+    hero->maxVelocity.x = 300;
+    hero->maxVelocity.y = 300;
+
+    hero->acceleration.x = 0;
+    hero->acceleration.y = 0;
 
     hero->inputManager = inputManager;
 
     Sdl2Renderer * renderer = new Sdl2Renderer("Incrementalist step 3", WINDOW_WIDTH, WINDOW_HEIGHT);
     renderer->inputManager = inputManager;
-
 
     MainController * controller = new MainController();
     controller->actor = hero;

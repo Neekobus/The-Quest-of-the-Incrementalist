@@ -2,30 +2,31 @@
 #include <iostream>
 
 Actor::Actor(){
-    this->x = 0;
-    this->y = 0;
+    this->position = Vector();
     this->width = 0;
     this->height = 0;
-    this->currentVelocity = 0;
-    this->maxVelocity = 0;
-    this->acceleration = 0;
+    
+    this->currentVelocity = Vector();
+    this->maxVelocity = Vector();
+    this->acceleration = Vector();
+    
     this->name = "unknown";
 }
 
 void Actor::checkMove(bool move){
     
-    if (this->currentVelocity == 0 && ! move ) {
+    if (this->currentVelocity.x == 0 && ! move ) {
         return;
     }
 
-    if (this->currentVelocity == 0 && move) {
-        this->currentVelocity = this->startVelocity;
-        this->acceleration = 1.3;
+    if (this->currentVelocity.x == 0 && move) {
+        this->currentVelocity.x = this->startVelocity.x;
+        this->acceleration.x = 1.3;
         return;
     }
 
-    if (this->currentVelocity != 0 && !move) {
-        this->acceleration = 0.8;
+    if (this->currentVelocity.x != 0 && !move) {
+        this->acceleration.x = 0.8;
         return;
     }
 
@@ -47,34 +48,34 @@ void Actor::move(float elapsedMs) {
     }
 
     if (left && right) {
-        this->currentVelocity = 0;
+        this->currentVelocity.x = 0;
     }
 
-    std::cout << "Acceleration : " << this->acceleration << "" << std::endl;
+    std::cout << "Acceleration : " << this->acceleration.x << "" << std::endl;
     
     //acceleration
-    this->currentVelocity *= this->acceleration;
+    this->currentVelocity.x *= this->acceleration.x;
 
     //bounds
-    if (this->currentVelocity < this->startVelocity) {
-        this->currentVelocity = 0;
+    if (this->currentVelocity.x < this->startVelocity.x) {
+        this->currentVelocity.x = 0;
         way = 1;
     }
 
-    if (this->currentVelocity > this->maxVelocity) {
-        this->currentVelocity = this->maxVelocity;
+    if (this->currentVelocity.x > this->maxVelocity.x) {
+        this->currentVelocity.x = this->maxVelocity.x;
     }
 
     float elapsedSec = elapsedMs / 1000;
-    float move = this->currentVelocity * elapsedSec ;
+    float move = this->currentVelocity.x * elapsedSec ;
 
     move *= this->way;    
     
     
 
-    std::cout << "Velocity : " << this->currentVelocity << " px/s" << std::endl;
+    std::cout << "Velocity : " << this->currentVelocity.x << " px/s" << std::endl;
     std::cout << "Elapsed : " << elapsedSec << " s" << std::endl;
     std::cout << "Move : " << move << " px" << std::endl;
  
-    this->x = this->x + move;
+    this->position.x = this->position.x + move;
 }
