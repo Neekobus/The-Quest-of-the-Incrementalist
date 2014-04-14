@@ -12,14 +12,14 @@ void MainController::run(){
 	this->running = true;
 
   Timer timer;
-  timer.expectedDurationMs = 1000 / 30;
+  timer.expectedDurationMs = 0;
   timer.frame();
   
   while(this->running) {
     timer.waitIfNeeded();
 
     int elapsedTime = timer.durationSinceLastFrame();
-    this->step(elapsedTime);
+    this->step(30);
     
     timer.frame();
   }

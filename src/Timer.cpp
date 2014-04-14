@@ -49,6 +49,6 @@ void Timer::waitIfNeeded() {
 
 void Timer::sleepMs(int millisec) {
     //std::cout << "Wait: " << millisec << " ms" << std::endl;
-    usleep(millisec * 1000);
-    this->totalSleepMs += millisec;
+    //usleep(millisec * 1000);
+    //this->totalSleepMs += millisec;
 }

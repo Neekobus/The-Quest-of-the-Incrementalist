@@ -2,7 +2,7 @@
 #define MAINCONTROLLERH
 
 #include "Actor.h"
-#include "Sdl2Renderer.h"
+#include "NdsRenderer.h"
 
 class MainController { 
 	protected: 
@@ -10,7 +10,7 @@ class MainController {
     public:
         MainController();
         ~MainController();
-        Sdl2Renderer * renderer;
+        NdsRenderer * renderer;
         Actor * actor;
 
         void run();

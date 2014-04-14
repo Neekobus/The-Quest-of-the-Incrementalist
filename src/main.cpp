@@ -1,15 +1,16 @@
-#include <SDL2/SDL.h>
-#include <SDL2_Image/SDL_image.h>
 #include <iostream>
 
 #include "Actor.h"
-#include "Sdl2Renderer.h"
+//#include "Sdl2Renderer.h"
 #include "InputManager.h"
 #include "MainController.h"
+
 #include "KeyboardBehavior.h"
 #include "PointerClickBehavior.h"
 #include "MoveBehavior.h"
 #include "CollectionMoveBehavior.h"
+
+#include "NdsRenderer.h"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
@@ -49,19 +50,21 @@ MoveBehavior * buildMoveBehavior(Actor* actor, InputManager * inputManager) {
 int main( int argc, char* args[] )
 {
 
-	std::cout << "Testing SDL2..." << std::endl;
+	std::cout << "Testing NDS..." << std::endl;
 
     InputManager * inputManager = new InputManager();
     
     Actor * hero = new Actor();
     hero->name = "hero.png";
+
     hero->width = 100;
     hero->height = 158;
-    hero->position.x = (WINDOW_WIDTH/2) - hero->width/2;
-    hero->position.y = (WINDOW_HEIGHT/2) - hero->height/2;
+    hero->position.x = 0;
+    hero->position.y = 0;
     hero->behavior = buildMoveBehavior(hero, inputManager);
 
-    Sdl2Renderer * renderer = new Sdl2Renderer("Incrementalist step 4", WINDOW_WIDTH, WINDOW_HEIGHT);
+    NdsRenderer * renderer = new NdsRenderer("Incrementalist step 4x");
+
     renderer->inputManager = inputManager;
 
     MainController * controller = new MainController();
@@ -74,7 +77,7 @@ int main( int argc, char* args[] )
     delete hero;
     delete renderer;
 
-    std::cout << "...Done testing SDL2." << std::endl;
+    std::cout << "...Done testing NDS." << std::endl;
 
     return 0;
 }

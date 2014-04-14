@@ -1,2 +1,5 @@
+build
+*.nds
+*.elf
 a.out
 .DS_Store
