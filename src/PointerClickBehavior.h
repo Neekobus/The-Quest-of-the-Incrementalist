@@ -1,12 +1,13 @@
 #ifndef POINTERCLICKBEHAVIORH
 #define POINTERCLICKBEHAVIORH
 
+#include "MoveBehavior.h"
 #include <string>
 #include "InputManager.h"
 #include "Vector.h"
 #include "Actor.h"
 
-class PointerClickBehavior {  
+class PointerClickBehavior : public MoveBehavior {  
     protected: 
         bool active;
         Vector destination;
@@ -27,6 +28,6 @@ class PointerClickBehavior {
 
         InputManager * inputManager;
 
-        void move(float elapsedMs);
+        virtual void move(float elapsedMs);
 };
 #endif

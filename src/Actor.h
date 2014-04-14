@@ -4,8 +4,8 @@
 #include <string>
 #include "InputManager.h"
 #include "Vector.h"
+#include "MoveBehavior.h"
 
-class PointerClickBehavior;
 class Actor {  
     public:
         Actor();
@@ -14,7 +14,7 @@ class Actor {
         int width;
         int height;
 
-        PointerClickBehavior * behavior;
+        MoveBehavior * behavior;
         
         std::string name;
 

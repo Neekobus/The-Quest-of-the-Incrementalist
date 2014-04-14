@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Actor.h"
-#include "PointerClickBehavior.h"
 
 Actor::Actor(){
     this->position = Vector();
@@ -8,7 +7,6 @@ Actor::Actor(){
     this->height = 0;
     
     this->behavior = NULL;
-    
     this->name = "unknown";
 }
 

@@ -1,12 +1,13 @@
 #ifndef KEYBOARDBEHAVIORH
 #define KEYBOARDBEHAVIORH
 
+#include "MoveBehavior.h"
 #include <string>
 #include "InputManager.h"
 #include "Vector.h"
 #include "Actor.h"
 
-class KeyboardBehavior {  
+class KeyboardBehavior : public MoveBehavior {  
     protected: 
         void checkMove(bool moveWay1, bool moveWay2, float &currentVelocity, float &startVelocity, float &acceleration, float &way);
         void doMove(float elapsedMs, float &acceleration, float &currentVelocity, float &startVelocity, float &maxVelocity, float &position, float &way);
@@ -24,6 +25,6 @@ class KeyboardBehavior {
 
         InputManager * inputManager;
 
-        void move(float elapsedMs);
+        virtual void move(float elapsedMs);
 };
 #endif
