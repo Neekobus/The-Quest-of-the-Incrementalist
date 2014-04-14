@@ -76,6 +76,28 @@ bool Sdl2Renderer::processEventsAndWaitForExit(){
             break;
         }
         
+        if (e.type == SDL_MOUSEBUTTONDOWN) { 
+            if(e.button.button == 1) {
+                this->inputManager->inputPressed(InputManager::INPUT_POINTER_MAIN_BUTTON);
+            } else {
+                this->inputManager->inputPressed(InputManager::INPUT_POINTER_SECONDARY_BUTTON);
+            }
+        }
+        
+        if (e.type == SDL_MOUSEBUTTONUP) { 
+            if(e.button.button == 1) {
+                this->inputManager->inputReleased(InputManager::INPUT_POINTER_MAIN_BUTTON);
+            } else {
+                this->inputManager->inputReleased(InputManager::INPUT_POINTER_SECONDARY_BUTTON);
+            }
+        }
+
+        if (e.type == SDL_MOUSEMOTION) { 
+            this->inputManager->pointer.x = e.motion.x;
+            this->inputManager->pointer.y = e.motion.y;
+        }
+        
+
         if (e.type == SDL_KEYDOWN) {
             if(e.key.keysym.sym==SDLK_LEFT){
                 this->inputManager->inputPressed(InputManager::INPUT_LEFT_ARROW);

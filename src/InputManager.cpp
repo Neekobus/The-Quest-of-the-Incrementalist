@@ -6,9 +6,12 @@ int InputManager::INPUT_UP_ARROW = 2;
 int InputManager::INPUT_LEFT_ARROW = 3;
 int InputManager::INPUT_RIGHT_ARROW = 4;
 int InputManager::INPUT_SHIFT = 5;
+int InputManager::INPUT_POINTER_MAIN_BUTTON = 6;
+int InputManager::INPUT_POINTER_SECONDARY_BUTTON = 7;
 
 InputManager::InputManager(){
     this->pressed = std::map<int, bool>();
+    this->pointer = Vector();
 }
 
 InputManager::~InputManager(){
