@@ -10,13 +10,14 @@
 #include "PointerClickBehavior.h"
 #include "MoveBehavior.h"
 #include "CollectionMoveBehavior.h"
+#include "PointerClickBresenhamBehavior.h"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
 
 MoveBehavior * buildMoveBehavior(Actor* actor, InputManager * inputManager) {
 
-    PointerClickBehavior * pointerBehavior = new PointerClickBehavior(actor);
+    PointerClickBresenhamBehavior * pointerBehavior = new PointerClickBresenhamBehavior(actor);
     pointerBehavior->inputManager = inputManager;
     pointerBehavior->currentVelocity.x = 0;
     pointerBehavior->currentVelocity.y = 0;
@@ -24,7 +25,7 @@ MoveBehavior * buildMoveBehavior(Actor* actor, InputManager * inputManager) {
     pointerBehavior->startVelocity.y = 20;
     pointerBehavior->maxVelocity.x = 500;
     pointerBehavior->maxVelocity.y = 500;
-    pointerBehavior->acceleration.x = 0;
+    pointerBehavior->acceleration.x = 1.3;
     pointerBehavior->acceleration.y = 0;
 
     KeyboardBehavior * keyboardBehavior = new KeyboardBehavior(actor);
