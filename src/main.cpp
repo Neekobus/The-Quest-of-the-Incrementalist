@@ -6,6 +6,7 @@
 #include "Sdl2Renderer.h"
 #include "InputManager.h"
 #include "MainController.h"
+#include "KeyboardBehavior.h"
 
 const int WINDOW_WIDTH = 640;
 const int WINDOW_HEIGHT = 480;
@@ -16,7 +17,7 @@ int main( int argc, char* args[] )
 	std::cout << "Testing SDL2..." << std::endl;
 
     InputManager * inputManager = new InputManager();
-
+    
     Actor * hero = new Actor();
     hero->name = "hero.png";
     hero->width = 100;
@@ -24,21 +25,26 @@ int main( int argc, char* args[] )
     hero->position.x = (WINDOW_WIDTH/2) - hero->width/2;
     hero->position.y = (WINDOW_HEIGHT/2) - hero->height/2;
     
-    hero->currentVelocity.x = 0;
-    hero->currentVelocity.y = 0;
+    KeyboardBehavior * keyboardBehavior = new KeyboardBehavior(hero);
+    hero->behavior = keyboardBehavior;
+
+    keyboardBehavior->currentVelocity.x = 0;
+    keyboardBehavior->currentVelocity.y = 0;
     
-    hero->startVelocity.x = 20;
-    hero->startVelocity.y = 20;
+    keyboardBehavior->startVelocity.x = 20;
+    keyboardBehavior->startVelocity.y = 20;
 
-    hero->maxVelocity.x = 300;
-    hero->maxVelocity.y = 300;
+    keyboardBehavior->maxVelocity.x = 300;
+    keyboardBehavior->maxVelocity.y = 300;
 
-    hero->acceleration.x = 0;
-    hero->acceleration.y = 0;
+    keyboardBehavior->acceleration.x = 0;
+    keyboardBehavior->acceleration.y = 0;
 
-    hero->inputManager = inputManager;
+    keyboardBehavior->inputManager = inputManager;
 
-    Sdl2Renderer * renderer = new Sdl2Renderer("Incrementalist step 3", WINDOW_WIDTH, WINDOW_HEIGHT);
+
+
+    Sdl2Renderer * renderer = new Sdl2Renderer("Incrementalist step 4", WINDOW_WIDTH, WINDOW_HEIGHT);
     renderer->inputManager = inputManager;
 
     MainController * controller = new MainController();

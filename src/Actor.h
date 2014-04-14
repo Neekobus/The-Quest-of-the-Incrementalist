@@ -5,11 +5,8 @@
 #include "InputManager.h"
 #include "Vector.h"
 
+class KeyboardBehavior;
 class Actor {  
-    protected: 
-        void checkMove(bool moveWay1, bool moveWay2, float &currentVelocity, float &startVelocity, float &acceleration, float &way);
-        void doMove(float elapsedMs, float &acceleration, float &currentVelocity, float &startVelocity, float &maxVelocity, float &position, float &way);
-        Vector way;
     public:
         Actor();
         Vector position;
@@ -17,13 +14,8 @@ class Actor {
         int width;
         int height;
 
-        Vector currentVelocity;
-        Vector startVelocity;
-        Vector maxVelocity;
-        Vector acceleration;
-
-        InputManager * inputManager;
-
+        KeyboardBehavior * behavior;
+        
         std::string name;
 
         void move(float elapsedMs);
