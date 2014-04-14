@@ -9,6 +9,8 @@ PointerClickBehavior::PointerClickBehavior(Actor * actor){
     this->acceleration = Vector();
 
     this->destination = Vector();
+
+    this->active = false;
     
 }
 
@@ -82,11 +84,20 @@ void PointerClickBehavior::doMove(float elapsedMs, float &acceleration, float &c
 void PointerClickBehavior::move(float elapsedMs) {
 
     if (this->inputManager->isPressed(InputManager::INPUT_POINTER_MAIN_BUTTON)) {
-        this->destination.x = this->inputManager->pointer.x;
-        this->destination.y = this->inputManager->pointer.y;
+        this->active = true;
+        this->destination.x = this->inputManager->pointer.x - (this->actor->width / 2);
+        this->destination.y = this->inputManager->pointer.y - (this->actor->height / 2);
 
         std::cout << "Destination : x:" << this->destination.x << "/ y:" << this->destination.y << std::endl;
     } else {
+
+        this->currentVelocity.x = 0;
+        this->currentVelocity.y = 0;
+
+        return;
+    }
+
+    if (! this->active) {
         return;
     }
 

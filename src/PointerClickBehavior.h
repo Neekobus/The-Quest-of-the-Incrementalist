@@ -8,7 +8,7 @@
 
 class PointerClickBehavior {  
     protected: 
-
+        bool active;
         Vector destination;
 
         void checkMove(bool moveWay1, bool moveWay2, float &currentVelocity, float &startVelocity, float &acceleration, float &way);
