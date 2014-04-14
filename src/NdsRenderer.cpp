@@ -16,14 +16,13 @@ void NdsRenderer::screenColor(int color){
 void NdsRenderer::start(){
     std::cout << "Starting NDS Renderer..." << std::endl;
 
-    irqInit();
-    irqEnable(IRQ_VBLANK);
+//    irqInit();
+//    irqEnable(IRQ_VBLANK);
 
     consoleDemoInit();
     videoSetMode(MODE_FB0);
     vramSetBankA(VRAM_A_LCD);
     screenColor(3);
-
 
 }
 
@@ -34,6 +33,9 @@ void NdsRenderer::stop(){
 
 
 void NdsRenderer::showActor(Actor * actor) {
+
+
+
     swiWaitForVBlank();
     screenColor(3);
 
@@ -69,16 +71,29 @@ void NdsRenderer::showActor(Actor * actor) {
 
 bool NdsRenderer::processEventsAndWaitForExit(){
 
-
-    //touchPosition touch;
     scanKeys();
+    touchPosition touch;
     int keys = keysHeld();
-    //touchRead(&touch);
+    
 
     this->inputManager->inputReleased(InputManager::INPUT_UP_ARROW);
     this->inputManager->inputReleased(InputManager::INPUT_DOWN_ARROW);
     this->inputManager->inputReleased(InputManager::INPUT_LEFT_ARROW);
     this->inputManager->inputReleased(InputManager::INPUT_RIGHT_ARROW);
+    this->inputManager->inputReleased(InputManager::INPUT_POINTER_MAIN_BUTTON);
+
+    std::cout << "Keys "  << keys << std::endl;
+
+    if(keys & KEY_TOUCH) {
+        touchRead(&touch);
+        std::cout << "touch " << touch.px << std::endl;
+
+        this->inputManager->inputPressed(InputManager::INPUT_POINTER_MAIN_BUTTON);
+        this->inputManager->pointer.x = touch.px;
+        this->inputManager->pointer.y = touch.py;
+
+     
+    }
 
     if(keys & KEY_UP) {
         this->inputManager->inputPressed(InputManager::INPUT_UP_ARROW);        

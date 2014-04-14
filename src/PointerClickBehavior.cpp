@@ -1,5 +1,6 @@
 #include "PointerClickBehavior.h"
 #include <iostream>
+#include <stdlib.h>
 
 PointerClickBehavior::PointerClickBehavior(Actor * actor){
     

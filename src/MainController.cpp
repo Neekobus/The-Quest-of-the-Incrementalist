@@ -19,7 +19,7 @@ void MainController::run(){
     timer.waitIfNeeded();
 
     int elapsedTime = timer.durationSinceLastFrame();
-    this->step(30);
+    this->step(1000/60);
     
     timer.frame();
   }

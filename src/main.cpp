@@ -21,8 +21,8 @@ MoveBehavior * buildMoveBehavior(Actor* actor, InputManager * inputManager) {
     pointerBehavior->inputManager = inputManager;
     pointerBehavior->currentVelocity.x = 0;
     pointerBehavior->currentVelocity.y = 0;
-    pointerBehavior->startVelocity.x = 20;
-    pointerBehavior->startVelocity.y = 20;
+    pointerBehavior->startVelocity.x = 100;
+    pointerBehavior->startVelocity.y = 100;
     pointerBehavior->maxVelocity.x = 500;
     pointerBehavior->maxVelocity.y = 500;
     pointerBehavior->acceleration.x = 0;
@@ -57,8 +57,8 @@ int main( int argc, char* args[] )
     Actor * hero = new Actor();
     hero->name = "hero.png";
 
-    hero->width = 100;
-    hero->height = 158;
+    hero->width = 20;
+    hero->height = 30;
     hero->position.x = 0;
     hero->position.y = 0;
     hero->behavior = buildMoveBehavior(hero, inputManager);
