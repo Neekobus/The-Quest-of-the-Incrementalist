@@ -1,6 +1,6 @@
 #include <iostream>
 #include "Actor.h"
-#include "KeyboardBehavior.h"
+#include "PointerClickBehavior.h"
 
 Actor::Actor(){
     this->position = Vector();

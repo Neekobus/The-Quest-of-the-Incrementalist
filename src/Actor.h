@@ -5,7 +5,7 @@
 #include "InputManager.h"
 #include "Vector.h"
 
-class KeyboardBehavior;
+class PointerClickBehavior;
 class Actor {  
     public:
         Actor();
@@ -14,7 +14,7 @@ class Actor {
         int width;
         int height;
 
-        KeyboardBehavior * behavior;
+        PointerClickBehavior * behavior;
         
         std::string name;
 
