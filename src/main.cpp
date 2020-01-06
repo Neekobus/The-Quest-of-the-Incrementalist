@@ -1,5 +1,5 @@
-#include <SDL2/SDL.h>
-#include <SDL2_Image/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include <iostream>
 
 #include "Actor.h"
@@ -57,7 +57,7 @@ int main( int argc, char* args[] )
     Actor * hero = new Actor();
     hero->name = "hero.png";
     hero->width = 100;
-    hero->height = 158;
+    hero->height = 156;
     hero->position.x = (WINDOW_WIDTH/2) - hero->width/2;
     hero->position.y = (WINDOW_HEIGHT/2) - hero->height/2;
     hero->behavior = buildMoveBehavior(hero, inputManager);

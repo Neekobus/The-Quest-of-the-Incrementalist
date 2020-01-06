@@ -7,6 +7,8 @@ Sdl2Renderer::Sdl2Renderer(std::string winTitle, int winWidth, int winHeight){
     this->windowWidth = winWidth;
     this->window = NULL;
     this->screen = NULL;
+
+    this->scale = 1;
 }
 
 void Sdl2Renderer::start(){
@@ -23,6 +25,12 @@ void Sdl2Renderer::start(){
         return this->stop();
     }
 
+
+    if( !SDL_SetHint( SDL_HINT_RENDER_SCALE_QUALITY, "0" ) ) {
+        std::cerr << "Warning: Linear texture filtering not enabled" << std::endl;
+    }
+
+
     this->window = SDL_CreateWindow( this->windowTitle.c_str(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, this->windowWidth, this->windowHeight, SDL_WINDOW_SHOWN );
     
     if( window == NULL ) {
@@ -31,6 +39,11 @@ void Sdl2Renderer::start(){
     }
 
     this->screen = SDL_GetWindowSurface( window );
+
+    //SDL_SetHint (SDL_HINT_RENDER_SCALE_QUALITY, "0");
+    //SDL_SetHint (SDL_HINT_RENDER_SCALE_QUALITY, "2");
+    //SDL_SetHint (SDL_HINT_RENDER_SCALE_QUALITY, 2);
+
 }
 
 
@@ -53,14 +66,21 @@ void Sdl2Renderer::showActor(Actor * actor) {
         return this->stop();
     }
 
+    /*this->scale -= 0.001;
+
+    if (this->scale < 0.2){
+        this->scale = 1;
+    }*/
+
     SDL_Rect destRect;
     destRect.x = actor->position.x;
     destRect.y = actor->position.y;
-    destRect.w = actor->width;
-    destRect.h = actor->height;
+    destRect.w = actor->width * this->scale;
+    destRect.h = actor->height * this->scale;
 
     SDL_FillRect( this->screen, NULL, SDL_MapRGB( this->screen->format, 0xAA, 0xAA, 0xAA ) );
     SDL_BlitSurface( heroImage, NULL, this->screen, &destRect );
+    //SDL_BlitScaled( heroImage, NULL, this->screen, &destRect );
     SDL_UpdateWindowSurface( this->window );
 
     SDL_FreeSurface( heroImage );

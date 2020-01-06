@@ -1,8 +1,8 @@
 #ifndef SDL2RENDERERH
 #define SDL2RENDERERH
 
-#include <SDL2/SDL.h>
-#include <SDL2_Image/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include <iostream>
 #include <string>
 
@@ -17,6 +17,8 @@ class Sdl2Renderer {
 
         SDL_Window * window;
         SDL_Surface * screen;
+
+        float scale;
 
     public:
         InputManager * inputManager;
